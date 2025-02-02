@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, Mail, Phone, X } from 'lucide-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { app } from './config/firebase';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { app} from './config/firebase';
 
 const db = getFirestore(app);
 
@@ -53,14 +53,30 @@ const App = () => {
     setIsSubmitting(true);
 
     try {
-      // Add registration to Firestore
+      // Validate form data
+      if (!formData.name || !formData.email || !formData.phone || !formData.university) {
+        throw new Error('Please fill in all fields');
+      }
+
+      // Create registration object using server timestamp
       const registrationData = {
         ...formData,
         event: selectedEvent?.title,
-        timestamp: new Date(),
+        timestamp: serverTimestamp(), // Use server timestamp instead of local time
+        status: 'pending',
+        createdAt: new Date().toISOString() // Backup client timestamp
       };
 
-      await addDoc(collection(db, "registrations"), registrationData);
+      // Verify db is initialized
+      if (!db) {
+        throw new Error('Firebase is not initialized properly');
+      }
+
+      // Add to Firestore with error handling
+      const registrationsRef = collection(db, "registrations");
+      const docRef = await addDoc(registrationsRef, registrationData);
+
+      console.log("Registration successful with ID:", docRef.id);
 
       toast.success('Registration successful! We will contact you shortly.', {
         position: "top-right",
@@ -71,6 +87,7 @@ const App = () => {
         draggable: true,
       });
 
+      // Reset form and close modal
       setIsModalOpen(false);
       setFormData({
         name: '',
@@ -80,7 +97,19 @@ const App = () => {
       });
     } catch (error) {
       console.error("Error submitting registration:", error);
-      toast.error('Registration failed. Please try again later.', {
+
+      // More specific error messages
+      let errorMessage = 'Registration failed. Please try again later.';
+
+      if (error.message === 'Please fill in all fields') {
+        errorMessage = error.message;
+      } else if (error.code === 'permission-denied') {
+        errorMessage = 'Permission denied. Please check your authentication.';
+      } else if (error.message === 'Firebase is not initialized properly') {
+        errorMessage = 'System configuration error. Please contact support.';
+      }
+
+      toast.error(errorMessage, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
