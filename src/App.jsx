@@ -167,7 +167,7 @@ const App = () => {
         className="absolute inset-0 z-10"
         quantity={150}
         staticity={40}
-        color="#FFFFFF"
+        color="#47A1E3"
         ease="linear"
         mouseForce={50}
         mouseRadius={150}
@@ -279,7 +279,7 @@ const App = () => {
       </div>
 
       {/* Enhanced Events Section */}
-      <section id="events" className="py-20 px-4 relative scroll-mt-20">
+      <section id="events" className="py-20 px-4 relative scroll-mt-20 z-10">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -323,7 +323,7 @@ const App = () => {
       </section>
 
       {/* Enhanced Highlights Section */}
-      <section className="py-20 px-4 relative">
+      <section className="py-20 px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -358,7 +358,7 @@ const App = () => {
       </section>
 
       {/* Enhanced Location Section */}
-      <section className="py-20 px-4 relative">
+      <section className="py-20 px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -388,7 +388,7 @@ const App = () => {
       </section>
 
       {/* Enhanced Contact Section */}
-      <section id="contact" className="py-20 px-4 relative scroll-mt-20">
+      <section id="contact" className="py-20 px-4 relative scroll-mt-20 z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -419,7 +419,7 @@ const App = () => {
       </section>
 
       {/* Enhanced Footer */}
-      <footer className="py-8 px-4 text-center text-white/60 backdrop-blur-lg bg-black/30">
+      <footer className="z-10 py-8 px-4 text-center text-white/60 backdrop-blur-lg bg-black/30">
         <div className="max-w-4xl mx-auto">
           <p className="mb-4">© 2025 TechFest. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-4">
