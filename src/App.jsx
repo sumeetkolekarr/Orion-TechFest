@@ -265,7 +265,7 @@ const App = () => {
                 <motion.div
                   key={unit}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-white/10 shadow-lg"
+                  className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-lg rounded-xl p-3 md:p-3 border border-white/10 shadow-lg"
                 >
                   <div className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
                     {value}
