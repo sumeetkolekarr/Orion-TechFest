@@ -208,7 +208,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="text-xl md:text-2xl font-bold text-white">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-              WTF_2025
+              Orion 2025
             </span>
           </div>
           
