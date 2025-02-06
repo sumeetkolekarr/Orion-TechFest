@@ -244,6 +244,22 @@ const App = () => {
       </nav>
 
       {/* Enhanced Hero Section */}
+      <div className="relative min-h-screen">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('./an.png')", // Replace with your image URL
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Optional overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+
+      {/* Content */}
       <div className="relative min-h-screen flex items-center justify-center pt-20 px-4">
         <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto">
           <motion.div
@@ -277,6 +293,7 @@ const App = () => {
           </motion.div>
         </div>
       </div>
+    </div>
 
       {/* Enhanced Events Section */}
       <section id="events" className="py-20 px-4 relative scroll-mt-20 z-10">
