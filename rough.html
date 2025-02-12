@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORION 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: white;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            border: 2px solid #40E0D0;
+        }
+
+        .hero {
+            background: url(./media/Gradient.jpg);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            margin-left: 100px;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            margin-left: 100px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-left: 100px;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .about {
+            padding: 4rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .about-content h2 {
+            color: #ffff00;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .featured-events {
+            min-height: 100vh;
+            background: #000;
+            padding: 4rem 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-events h2 {
+            color: #ffff00;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1;
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-card.purple { border: 2px solid #800080; }
+        .event-card.red { border: 2px solid #ff4444; }
+        .event-card.teal { border: 2px solid #40E0D0; }
+
+        .event-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Event Highlights section */
+        .event-highlights {
+            min-height: 100vh;
+            background: #000;
+            padding: 4rem 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .highlights-title {
+            color: #ffff00;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2rem;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .achievement-text {
+            font-size: 2rem;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        .achievement-text span {
+            color: #666;
+        }
+
+        .stats-container {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* collaborations section */
+        .sponsors {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .sponsors h1 {
+            font-size: 2.5rem;
+            color: #ffff00;
+            margin-bottom: 100px;
+        }
+
+        .sponsors .container {
+            width: 90%;
+            max-width: 1200px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-container {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+        }
+
+        .slide-image {
+            width: 250px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .slide-image img {
+            width: 100%;
+            transition: transform 0.5s;
+        }
+
+        .slide-image img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">ORION</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#events">Events</a>
+            <a href="#sponsors">Sponsors</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+        <button class="contact-btn">CONTACT</button>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">ORION<span style="font-size: 2rem;">2025</span></h1>
+            <p class="hero-text">
+                When the chilling winters are at their peak and the cold world of autumn is about to begin, when the moods of people are getting festive, when exhilaration soars and anticipation rises, it is that time of the year again.
+            </p>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number">27</div>
+                    <div class="countdown-label">DAYS</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">18</div>
+                    <div class="countdown-label">HOURS</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">25</div>
+                    <div class="countdown-label">MINUTES</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">34</div>
+                    <div class="countdown-label">SECONDS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <img src="./media/home1.jpg" alt="DJ performing" class="about-image">
+        <div class="about-content">
+            <h2>ABOUT US</h2>
+            <p>
+                ORION, a student-driven festival is the jewel and pride of our university. Ranked among Odisha's Top 5 College Fests, ORION is a student-driven fest working for the past few years. Today, ORION is one of Odisha's biggest college festivals. It brings together a vibrant mix of culture, creativity, and competition, offering an electrifying experience that thrills and pushes for high-energy performance. Orion features everything from street plays and dance-offs to runway shows, making it an unforgettable celebration of talent and passion!
+            </p>
+        </div>
+    </section>
+
+    <section class="featured-events" id="events">
+        <h2>FEATURED EVENTS</h2>
+        <div class="events-grid">
+            <div class="event-card purple" id="fest-card">
+                <img src="./media/01.png" alt="UMANG event">
+                <div class="event-info">
+                    <div class="event-title">UMANG</div>
+                    <div class="event-subtitle">(CULTURAL FEST)</div>
+                    <div class="event-subtitle">DANCING | MUSIC | GAMING | FASHION | MODEL | DANCE | HIGH-FLIER</div>
+                </div>
+            </div>
+            <div class="event-card red" id="fest-card">
+                <img src="./media/02.png" alt="NISHKARSH event">
+                <div class="event-info">
+                    <div class="event-title">NISHKARSH</div>
+                    <div class="event-subtitle">(TECH FEST)</div>
+                    <div class="event-subtitle">E-SPORTS | CODE | GAMING | MARATHON</div>
+                </div>
+            </div>
+            <div class="event-card teal" id="fest-card">
+                <img src="./media/03.png" alt="TAKSHA event">
+                <div class="event-info">
+                    <div class="event-title">TAKSHA</div>
+                    <div class="event-subtitle">(BUSINESS FEST)</div>
+                    <div class="event-subtitle">INVESTING | SHARK TANK | STARTUPS | BUSINESS | IDEAS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-highlights" id="highlights">
+        <h2 class="highlights-title">EVENT HIGHLIGHTS</h2>
+        <div class="achievements-grid">
+            <div class="achievement-text">
+                Unusual devotion.<br>
+                Unusual <span>achievements.</span>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">₹5L+</div>
+                    <div class="stat-label">Prize Pool</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Business Investments</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Universities</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Events</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sponsors" id="sponsors">
+        <h1>OUR COLLABORATIONS</h1>
+        <div class="container">
+        <div class="slide-container" id="slider">
+            <div class="slide-image"><img src="./media/ff.png" alt="Image 1"></div>
+            <div class="slide-image"><img src="./media/bgmi.png" alt="Image 2"></div>
+            <div class="slide-image"><img src="./media/valo.png" alt="Image 3"></div>
+            <div class="slide-image"><img src="./media/01.png" alt="Image 4"></div>
+            <div class="slide-image"><img src="./media/02.png" alt="Image 5"></div>
+            <div class="slide-image"><img src="./media/03.png" alt="Image 6"></div>
+        </div>
+        </div>
+    </section>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const slider = document.getElementById("slider");
+            const images = Array.from(slider.children);
+            let speed = 1;
+            let scrollAmount = 0;
+
+            // Duplicate images for seamless effect
+            images.forEach(img => {
+                let clone = img.cloneNode(true);
+                slider.appendChild(clone);
+            });
+
+            function slide() {
+                scrollAmount += speed;
+                if (scrollAmount >= images[0].offsetWidth * images.length) {
+                    scrollAmount = 0; // Move back to the start smoothly
+                }
+                slider.style.transform = translateX(${-scrollAmount}px);
+                requestAnimationFrame(slide);
+            }
+        slide();
+    });
+
+    </script>
+</body>
+</html>

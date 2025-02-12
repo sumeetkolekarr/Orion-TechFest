@@ -167,7 +167,7 @@ const App = () => {
         className="absolute inset-0 z-10"
         quantity={150}
         staticity={40}
-        color="#47A1E3"
+        color="#FFFFFF"
         ease="linear"
         mouseForce={50}
         mouseRadius={150}
@@ -175,7 +175,7 @@ const App = () => {
 
       {/* Enhanced Animated Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-black/90 to-purple-900/80 animate-gradient-xy" />
+        <div className="absolute inset-0 animate-gradient-xy" style={{background: 'black'}} />
         <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.4)_100%)]" />
         <motion.div
           animate={{
@@ -211,7 +211,7 @@ const App = () => {
               Orion 2025
             </span>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             <NavLinks />
@@ -245,55 +245,56 @@ const App = () => {
 
       {/* Enhanced Hero Section */}
       <div className="relative min-h-screen">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: "url('./an.png')", // Replace with your image URL
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        {/* Optional overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            // backgroundImage: "url('./an.png')", // Replace with your image URL
+            // backgroundSize: 'cover',
+            // backgroundPosition: 'center',
+            // backgroundRepeat: 'no-repeat'
+            background: 'black',
+          }}
+        >
+          {/* Optional overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
 
-      {/* Content */}
-      <div className="relative min-h-screen flex items-center justify-center pt-20 px-4">
-        <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
-            <h1 className="text-4xl md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-              Orion 2025
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-8">
-              Where Innovation Meets Reality
-            </p>
+        {/* Content */}
+        <div className="relative min-h-screen flex items-center justify-center pt-20 px-4">
+          <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
+            >
+              <h1 className="text-4xl md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+                Orion 2025
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 mb-8">
+                Where Innovation Meets Reality
+              </p>
 
-            {/* Enhanced Countdown Timer */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12">
-              {Object.entries(timeLeft).map(([unit, value]) => (
-                <motion.div
-                  key={unit}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-lg rounded-xl p-3 md:p-3 border border-white/10 shadow-lg"
-                >
-                  <div className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
-                    {value}
-                  </div>
-                  <div className="text-sm uppercase text-white/60">{unit}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              {/* Enhanced Countdown Timer */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12">
+                {Object.entries(timeLeft).map(([unit, value]) => (
+                  <motion.div
+                    key={unit}
+                    whileHover={{ scale: 1.05 }}
+                    className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 backdrop-blur-lg rounded-xl p-3 md:p-3 border border-white/10 shadow-lg"
+                  >
+                    <div className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+                      {value}
+                    </div>
+                    <div className="text-sm uppercase text-white/60">{unit}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* Enhanced Events Section */}
       <section id="events" className="py-20 px-4 relative scroll-mt-20 z-10">
@@ -543,9 +544,8 @@ const NavLinks = ({ mobile, onClick }) => {
             scrollToSection(link.section);
             if (onClick) onClick();
           }}
-          className={`text-white hover:text-blue-400 transition-colors ${
-            mobile ? "block w-full text-left" : ""
-          }`}
+          className={`text-white hover:text-blue-400 transition-colors ${mobile ? "block w-full text-left" : ""
+            }`}
         >
           {link.text}
         </button>
